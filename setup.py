@@ -51,9 +51,9 @@ print(info + "Changing permissions of files in ~/bin")
 os.chmod(os.path.expanduser("~/bin/wild.py"), 0o744)
 os.chmod(os.path.expanduser("~/bin/wild"), 0o744)
 
-print(info + "Adding code completion line to .bashrc")
+print(info + "Adding code completion line and PATH addition to .bashrc")
 with open(os.path.expanduser("~/.bashrc"), "a") as file:
-    file.write("complete -o nospace -C ~/bin/wild.py wild")
+    file.write("complete -o nospace -C ~/bin/wild.py wild\nPATH=~/bin:$PATH\n")
 
 print(info + "Done!")
 
