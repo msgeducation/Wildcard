@@ -8,7 +8,7 @@ path = os.path.expanduser('~/Wildcard/scripts/')
 line = os.environ.get("COMP_LINE").split(' ')
 line.append('')
 if(os.path.isfile(path + line[1]) and os.path.isfile(path + line[1] + '.bash') and line[1] != sys.argv[2]):
-        os.execv(path + line[1] + '.bash', [path + line[1], line[1].split("/")[-1], sys.argv[2], sys.argv[3]])
+        os.execv(path + line[1] + '.comp', [path + line[1] + '.comp', path + line[1], line[1].split("/")[-1], sys.argv[2], sys.argv[3]])
 
 # Args
 cur = sys.argv[2]
