@@ -2,5 +2,5 @@
 import sys
 import os
 args = sys.argv
-args[1] = "/home/msgvte/.wildcard/" + args[1]
+args[1] = "/home/msgvte/.wildcard/scripts" + args[1]
 os.execv(args[1], args[1:])

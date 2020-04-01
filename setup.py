@@ -23,21 +23,28 @@ art = \
  *     *          ## ##     ##  ######  #####    ######  ##      ##  ##  ##  #####         *     *
 """
 print(COLORS.GREEN + art + COLORS.RESET)
-if(input("Start wildcard install? (Y/n)").contains('n')):
+if('n' in input("Start wildcard install? (Y/n)")):
     print(error + "Aborting.")
     exit()
-os.chdir(os.path.dirname(__file__))
+try:
+    os.chdir(os.path.dirname(__file__))
+except (FileNotFoundError):
+    pass
+
 
 print(info + "Making ~/bin directory")
-os.mkdir(os.path.expanduser("~/bin"))
+try:
+    os.mkdir(os.path.expanduser("~/bin"))
+except(FileExistsError):
+    pass
 
 print(info + "Copying files into ~/bin directory")
-copyfile("wild.py", os.path.expanduser("~/bin/wild.py"))
-copyfile("wild", os.path.expanduser("~/bin/wild"))
+shutil.copyfile("wild.py", os.path.expanduser("~/bin/wild.py"))
+shutil.copyfile("wild", os.path.expanduser("~/bin/wild"))
 
 print(info + "Changing permissions of files in ~/bin")
-os.chmod(os.path.expanduser("~/bin/wild.py"), 744)
-os.chmod(os.path.expanduser("~/bin/wild"), 744)
+os.chmod(os.path.expanduser("~/bin/wild.py"), 0o744)
+os.chmod(os.path.expanduser("~/bin/wild"), 0o744)
 
 print(info + "Adding code completion line to .bashrc")
 with open(os.path.expanduser("~/.bashrc"), "a") as file:

@@ -4,7 +4,7 @@ import os
 import re
 
 # Constants
-path = '/home/msgvte/.wildcard/'
+path = os.path.expanduser('~/.wildcard/scripts/')
 line = os.environ.get("COMP_LINE").split(' ')
 line.append('')
 if(os.path.isfile(path + line[1]) and os.path.isfile(path + line[1] + '.bash') and line[1] != sys.argv[2]):
