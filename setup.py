@@ -33,13 +33,13 @@ except (FileNotFoundError):
     pass
 
 
-print(info + "Making ~/bin and ~/.wildcard/scripts directory")
+print(info + "Making ~/bin and ~/Wildcard/scripts directory")
 try:
     os.mkdir(os.path.expanduser("~/bin"))
 except(FileExistsError):
     pass
 try:
-    os.mkdir(os.path.expanduser("~/.wildcard/scripts"))
+    os.mkdir(os.path.expanduser("~/Wildcard/scripts"))
 except(FileExistsError):
     pass
 
