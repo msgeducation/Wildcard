@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import shutil
 import os
 
@@ -32,9 +33,13 @@ except (FileNotFoundError):
     pass
 
 
-print(info + "Making ~/bin directory")
+print(info + "Making ~/bin and ~/.wildcard/scripts directory")
 try:
     os.mkdir(os.path.expanduser("~/bin"))
+except(FileExistsError):
+    pass
+try:
+    os.mkdir(os.path.expanduser("~/.wildcard/scripts"))
 except(FileExistsError):
     pass
 
