@@ -55,5 +55,5 @@ print(info + "Adding code completion line and PATH addition to .bashrc")
 with open(os.path.expanduser("~/.bashrc"), "a") as file:
     file.write("complete -o nospace -C ~/bin/wild.py wild\nPATH=~/bin:$PATH\n")
 
-print(info + "Done!")
+print(info + "Done! Please source your .bashrc before testing.")
 
