@@ -1,0 +1,8 @@
+#!/usr/bin/python3
+import sys
+possible = ['--enable','-e','--disable','-d','--enableold','-o']
+current = sys.argv[3]
+for x in possible:
+	if(x[0:len(current)] == current):
+		print(x)
+

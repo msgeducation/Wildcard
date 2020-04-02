@@ -7,14 +7,17 @@ import re
 path = os.path.expanduser('~/Wildcard/scripts/')
 line = os.environ.get("COMP_LINE").split(' ')
 line.append('')
-if(os.path.isfile(path + line[1]) and os.path.isfile(path + line[1] + '.bash') and line[1] != sys.argv[2]):
-        os.execv(path + line[1] + '.comp', [path + line[1] + '.comp', path + line[1], line[1].split("/")[-1], sys.argv[2], sys.argv[3]])
+
+# If we have already typed the filename and it should use its own completion and there is a file for it to do its own completion, exec that file
+if(os.path.isfile(path + line[1]) and os.path.isfile(path + os.path.dirname(line[1]) + '/.' + os.path.basename(line[1]) + '.comp') and line[1] != sys.argv[2]):
+        os.execv(path + os.path.dirname(line[1]) + '/.' + os.path.basename(line[1]) + '.comp', [path + os.path.dirname(line[1]) + '/.' + os.path.basename(line[1]) + '.comp', path + line[1], line[1].split("/")[-1], sys.argv[2], sys.argv[3]])
 
 # Args
 cur = sys.argv[2]
 prev = sys.argv[3]
 
 # Will get up to the last slash and after because it is greedy
+# Should really be doing this with os.path.dirname and os.path.basename but I'm lazy
 match = re.match('(.*)/(.*)', cur)
 if (match is None):
     directory = ''
@@ -23,17 +26,22 @@ else:
     directory = match.group(1)
     toComplete = match.group(2)
 
+# Get a list of files in the directory typed
 options = os.listdir(path + directory)
 newarr = []
 for x in options:
+    # Remove files that don't begin with what is typed
     try:
         if(x.index(toComplete) != 0):
             continue
     except (ValueError):
         continue
+    # Remove autocompletion files
+    if(x.endswith('.comp')):
+            continue
     tmp = x
+    # If it's a directory append a trailing slash
     if(not os.path.isfile(os.path.join(path + directory, tmp))):
         tmp += '/'
-    # tmp = tmp.replace(toComplete, '', 1)
     print os.path.join(directory, tmp)
     
