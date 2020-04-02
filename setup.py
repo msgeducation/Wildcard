@@ -44,16 +44,21 @@ except(FileExistsError):
     pass
 
 print(info + "Copying files into ~/bin directory")
-shutil.copyfile("wild.py", os.path.expanduser("~/bin/wild.py"))
+shutil.copyfile("wild.comp", os.path.expanduser("~/bin/wild.comp"))
 shutil.copyfile("wild", os.path.expanduser("~/bin/wild"))
 
 print(info + "Changing permissions of files in ~/bin")
-os.chmod(os.path.expanduser("~/bin/wild.py"), 0o744)
+os.chmod(os.path.expanduser("~/bin/wild.comp"), 0o744)
 os.chmod(os.path.expanduser("~/bin/wild"), 0o744)
 
-print(info + "Adding code completion line and PATH addition to .bashrc")
-with open(os.path.expanduser("~/.bashrc"), "a") as file:
-    file.write("complete -o nospace -C ~/bin/wild.py wild\nPATH=~/bin:$PATH\n")
+try:
+    open('.status', 'r')
+except FileNotFoundError:
+    print(info + "Adding code completion line and PATH addition to .bashrc")
+    with open(os.path.expanduser("~/.bashrc"), "a") as file:
+        file.write("complete -o nospace -C ~/bin/wild.comp wild\nPATH=~/bin:$PATH\n")
+    with open('.status', 'w') as file:
+        file.write('\n')
 
 print(info + "Done! Please source your .bashrc before testing.")
 
