@@ -14,7 +14,7 @@ source ~/.bashrc
 wild test.sh
 ```
 ## Using
-To use just type `wild` and the location of the script.  So if you have a moodle maintanence mode script you can run it by typing from anywhere `wild moodle/maintanence.sh --help`.  
+To use just type `wild` and the location of the script relative to the scripts directory.  So if you have a moodle maintanence mode script you can run it by typing from anywhere `wild moodle/maintanence.sh --help`.  
 
 ## Contributing
 To add scripts think about the purpose of the script and how it should be organized.  For example to put moodle in maintanence mode you might make a script called `maintanence.sh` under `~/Wildcard/scripts/moodle/maintanence.sh`.  The script **must** by shell-executable.  
