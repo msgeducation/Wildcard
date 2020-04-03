@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import sys
 import os
 import shlex
@@ -6,8 +6,8 @@ import subprocess
 command = shlex.split("env -i bash -c 'set -a && source ~/Wildcard/wildcard.conf && env'")
 proc = subprocess.Popen(command, stdout = subprocess.PIPE)
 for line in proc.stdout:
-  (key, _, value) = line.partition("=")
-  os.environ[key] = value
+  (key, _, value) = line.partition(bytes("=", 'utf8'))
+  os.environ[key.decode()] = value.decode()
 proc.communicate()
 args = sys.argv
 args[1] = os.path.expanduser("~/Wildcard/scripts/" + args[1])
