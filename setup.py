@@ -44,8 +44,8 @@ except(FileExistsError):
     pass
 
 print(info + "Copying files into ~/bin directory")
-shutil.copyfile("wild.comp", os.path.expanduser("~/bin/wild.comp"))
-shutil.copyfile("wild", os.path.expanduser("~/bin/wild"))
+os.symlink(os.path.expanduser("~/Wildcard/wild.comp"), os.path.expanduser("~/bin/wild.comp"))
+os.symlink(os.path.expanduser('~/Wildcard/wild'), os.path.expanduser("~/bin/wild"))
 
 print(info + "Changing permissions of files in ~/bin")
 os.chmod(os.path.expanduser("~/bin/wild.comp"), 0o744)
